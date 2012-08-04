@@ -84,13 +84,13 @@ if (argv.v || argv.version) {
 }
 
 // Invalid config
-if (!path.existsSync(options.config)) {
+if (!fs.existsSync(options.config)) {
   process.stderr.write('Configuration file "' + options.config + '" is missing!\n');
   process.exit(0);
 }
 
 // Invalid root path
-if (!path.existsSync(options.root)) {
+if (!fs.existsSync(options.root)) {
   process.stderr.write('Root path "' + options.root + '" could not be found!\n');
   process.exit(0);
 }
@@ -101,7 +101,7 @@ var expander = new AssetsExpander(options.config, { root: options.root }),
 
 // Cache boosters stamp file
 var cacheFile = path.join(path.dirname(options.config), "." + path.basename(options.config) + '.json'),
-  cacheData = path.existsSync(cacheFile) ?
+  cacheData = fs.existsSync(cacheFile) ?
     JSON.parse(fs.readFileSync(cacheFile, 'utf8')) :
     {};
 
